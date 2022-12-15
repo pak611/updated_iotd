@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-w(297u3umjv+ct!@_+k5j8y+$4r^=+0ce!8uj&k@ua9lxh5kez
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['postgrestestenv13.eba-vsqcfvhg.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -85,16 +85,29 @@ DATABASES = {
 }
 '''
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'aws_postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'Pmk14328261157!',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-} 
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'aws_postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'Pmk14328261157!',
+            'HOST' : 'localhost',
+            'PORT' : '5432',
+        }
+    } 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -132,10 +145,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'iotd/static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+#STATIC_ROOT = os.path.join(BASE_DIR,'static/')
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+STATIC_URL = '/static/'
 
 #MEDIA FILE (user uploaded files)
 MEDIA_ROOT = os.path.join(BASE_DIR, "..", "www", "media")
