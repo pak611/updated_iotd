@@ -154,7 +154,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'iotd/static')]
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
-STATIC_URL = '/static/'
+STATIC_URL = '/static'
 
 #MEDIA FILE (user uploaded files)
 MEDIA_ROOT = os.path.join(BASE_DIR, "..", "www", "media")
