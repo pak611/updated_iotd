@@ -29,7 +29,8 @@ SECRET_KEY = "django-insecure-w(297u3umjv+ct!@_+k5j8y+$4r^=+0ce!8uj&k@ua9lxh5kez
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['postgrestestenv13.eba-vsqcfvhg.us-west-2.elasticbeanstalk.com']
+#ALLOWED_HOSTS = ['postgrestestenv13.eba-vsqcfvhg.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -87,7 +88,7 @@ DATABASES = {
     }
 }
 '''
-
+'''
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
@@ -101,16 +102,18 @@ if 'RDS_DB_NAME' in os.environ:
     }
 else:
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'aws_postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'Pmk14328261157!',
-            'HOST' : 'localhost',
-            'PORT' : '5432',
-        }
-    } 
+
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'testDatabase',
+        'USER': 'postgres',
+        'PASSWORD': 'Pmk14328261157!',
+        'HOST' : 'database-1.cchwqempiqaa.us-west-2.rds.amazonaws.com',
+        'PORT' : '5432',
+    }
+} 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -154,7 +157,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'iotd/static')]
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
-STATIC_URL = '/static'
+STATIC_URL = '/static/'
 
 #MEDIA FILE (user uploaded files)
 MEDIA_ROOT = os.path.join(BASE_DIR, "..", "www", "media")
